@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  app:
+    image: fripiane/gift-project
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: root
+    ports:
+      - "80:8080"
+    networks:
+      - default
+      - backend
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: GIFTProject
+    volumes:
+      - pg-data:/var/lib/postgresql/data
+      - ./pg-script:/docker-entrypoint-initdb.d
+    networks:
+      - backend
+
+networks:
+  backend:
+
+volumes:
+  pg-data:

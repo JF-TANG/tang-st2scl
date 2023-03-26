@@ -1,0 +1,23 @@
+kubectl create configmap pg-script --from-file=./pg-script
+kubectl create -f pg-data-pvc.yml
+kubectl create -f gift-deployment.yml
+kubectl create -f gifttwo-deployment.yml
+minikube service app --url
+
+kubectl get nodes
+kubectl get pods
+kubectl describe pods
+kubectl get deployment
+kubectl get service
+kubectl get pvc
+kubectl get configmaps
+
+kubectl delete service app
+kubectl delete deployment app
+kubectl delete pvc pg-data
+kubectl delete configmaps pg-script
+
+kubectl apply -f pod.yml
+kubectl exec -it pg-data-pod /bin/sh
+cd /data
+ls
